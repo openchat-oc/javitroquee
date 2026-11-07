@@ -143,9 +143,9 @@ class MainActivity:ComponentActivity(){
     Row(Modifier.fillMaxWidth().padding(horizontal=8.dp,vertical=3.dp),horizontalArrangement=Arrangement.spacedBy(5.dp)){
      OutlinedButton(onClick={val cell=active.cells.getOrNull(cursor);if(cell!=null){letters["${cell.first},${cell.second}"]=active.entry.answer[cursor];hints++;persist();if(cursor<active.cells.lastIndex)cursor++}},modifier=Modifier.weight(1f),contentPadding=PaddingValues(horizontal=3.dp)){Text("Pista",fontSize=11.sp)}
      OutlinedButton(onClick={letters.remove("${activeCell.first},${activeCell.second}");message="Casilla borrada"},modifier=Modifier.weight(1f),contentPadding=PaddingValues(horizontal=3.dp)){Text("Borrar",fontSize=11.sp)}
-     OutlinedButton(onClick={check},modifier=Modifier.weight(1f),contentPadding=PaddingValues(horizontal=3.dp)){Text("Comprobar",fontSize=11.sp)}
+     OutlinedButton(onClick={check()},modifier=Modifier.weight(1f),contentPadding=PaddingValues(horizontal=3.dp)){Text("Comprobar",fontSize=11.sp)}
     }
-    Button(onClick={nextPuzzle},modifier=Modifier.fillMaxWidth().padding(horizontal=12.dp,vertical=4.dp).height(43.dp),colors=ButtonDefaults.buttonColors(containerColor=Navy),shape=RoundedCornerShape(10.dp)){Text("＋  NUEVO CRUCIGRAMA",fontWeight=FontWeight.Bold)}
+    Button(onClick={nextPuzzle()},modifier=Modifier.fillMaxWidth().padding(horizontal=12.dp,vertical=4.dp).height(43.dp),colors=ButtonDefaults.buttonColors(containerColor=Navy),shape=RoundedCornerShape(10.dp)){Text("＋  NUEVO CRUCIGRAMA",fontWeight=FontWeight.Bold)}
    }
   }
   if(showClues)AlertDialog(onDismissRequest={showClues=false},title={Text("Lista de pistas")},text={LazyColumn{items(puzzle.all.size){i->val w=puzzle.all[i];Text("${w.number}. ${if(i==0)"Horizontal" else "Vertical"} · ${w.entry.clue}",Modifier.fillMaxWidth().clickable{selected=i;cursor=0;showClues=false}.padding(8.dp),color=Ink)}}},confirmButton={TextButton(onClick={showClues=false}){Text("Cerrar")}})
